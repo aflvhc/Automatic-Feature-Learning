@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "perf", "perf.vcproj", "{273630CA-B2FA-49E9-A13B-779E026AD4EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{273630CA-B2FA-49E9-A13B-779E026AD4EA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{273630CA-B2FA-49E9-A13B-779E026AD4EA}.Debug|Win32.Build.0 = Debug|Win32
+		{273630CA-B2FA-49E9-A13B-779E026AD4EA}.Release|Win32.ActiveCfg = Release|Win32
+		{273630CA-B2FA-49E9-A13B-779E026AD4EA}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

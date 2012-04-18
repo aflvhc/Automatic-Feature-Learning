@@ -1,0 +1,80 @@
+---------------------------------------------------------------
+March 1, 2009
+Subhransu Maji (smaji@cs.berkeley.edu)
+---------------------------------------------------------------
+This code is an addon to LIBSVM. Follow the instructions in README to compile the code.
+
+In addition to the executables in libSVM, the Makefile is modified
+to compile precomp_model.mex* and fiksvm_classify.mex*. 
+
+Some matlab code for usage:
+
+1)test_precomp_model.m : 
+Trains various svm_models and check if the precomputed models are 
+consistent. 
+
+
+2)benchmark_num_bins.m
+Benchmarks the accuracy and time for prediction for the approximate
+classifiers with varying number of bins, keeping the training and
+test size fixed. 
+
+3)benchmark_num_svs.m    
+Benchmarks the accuracy and time for prediction for the approximate
+classifiers with varying training size, keeping the test size and
+number of bins for approximation fixed. 
+
+svm.cpp/svm.h have been modified to support intersection kernel (-t 4). 
+
+Typical Usage:
+
+Step 1)
+
+Train a standard libSVM model using -t 4 option and C-SVC (-s 0). 
+NOTE only *BINARY* classifiers are supported currently. 
+
+e.g.
+model=svmtrain(training_label_vector, training_instance_matrix, '-t 4 -s 0 ...');
+
+Step 2)
+precompute various models for future use
+
+>>precomp_model
+Usage: model = precomp_model(model,'-m 0/1 -n num_bins')
+	 -m 0/1      : 0 - exact model [default]
+	             : 1 - approx model
+	 -n num_bins : number of bins for approximation
+	               default=100; num_bins>=1
+
+e.g.
+>> exact_model  = precomp_model(model,'-m 0');
+>> approx_model = precomp_model(model,'-m 1 -n 100');
+The later precomputes a approximate model with 100 bins
+per dimension. 
+
+Step 3)
+use either the approximate or exact model for prediction
+
+>>dec_values = fiksvm_predict(testing_label_vector, testing_instance_matrix, model,'options')
+ 
+ Output:
+           dec_values      : predictions using model
+ 
+ Options:
+   -e exact flag           : whether input model is exact or approx, 0 or 1 (default 0);
+   -b probability_estimates: whether to predict probability estimates, 0 or 1 (default 0);
+   -v verbose flag         : 0 or 1 (default 0);
+   -a approximation type   : 0 - piecewise const or 1 - piecewise linear (default 1);
+
+e.g.:
+
+%for exact predictions
+>>exact_values = fiksvm_predict(testing_label_vector, testing_instance_matrix, exact_model,'-e 1')
+
+%for piecewise linear approximation
+>>pwl_values = fiksvm_predict(testing_label_vector, testing_instance_matrix, approx_model,'-e 0 -a 1')
+
+%for probabibilities instead
+>>pwl_probs = fiksvm_predict(testing_label_vector, testing_instance_matrix, approx_model,'-e 0 -a 1 -b 1') %for probabilities
+
+

@@ -1,0 +1,4 @@
+function acc = Test(PosImgPath)
+TestInternal(PosImgPath);
+system('.\perf\Debug\perf.exe -data posinfo.txt -info "Haar Scripts.xml" -maxSizeDiff 4 -maxPosDiff 2' );
+return;
