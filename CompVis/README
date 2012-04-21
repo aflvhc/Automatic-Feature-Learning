@@ -1,0 +1,33 @@
+Hand crafted features
+----------------------------
+
+Directory Hierarchy
+CompVis: Directory having code for hand crafted features
+|
+---- db: Train and testing images
+|
+---- Haar: Code for cascaded boosted classifier
+|
+---- HOG: Code or HOG features
+|
+---- SIFT: Code for SIFT features
+|
+---- svm: Code for classifier
+
+INSTRUCTIONS:
+
+1) Haar features: Test(<full path of positive images in test directory>)
+
+2) HOG features: 
+      Step1: [posfeat negfeat modellin modelinter] = Train(<folder path for positive image samples for training>, <folder path for negative image samples for training>) 
+	  Step2: [acclin accinter] = Test(<folder path for positive test images>, <folder path for negative test images>, modellin, modelinter)
+
+3) SIFT features
+      Step1: [posdesc negdesc] = Train(<folder path for positive image samples for training>, <folder path for negative image samples for training>)
+      Step2: [tp fp] = SIFTMainScript(posdesc, negdesc, <folder path for positive test images>, <folder path for negative test images>)
+	  
+Source:
+Haar Features: http://sourceforge.net/projects/opencvlibrary/
+SIFT Features: http://www.cs.ubc.ca/~lowe/keypoints/
+HOG Features: http://www.mathworks.com/matlabcentral/fileexchange/28689-hog-descriptor-for-matlab
+SVM: http://www.csie.ntu.edu.tw/~cjlin/libsvm
